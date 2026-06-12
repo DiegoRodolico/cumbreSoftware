@@ -1,0 +1,21 @@
+import conocimientos.*
+import participantes.*
+import cumbre.*
+describe "test para cumbre" {
+    const Juana = new Programador(paisOrigen="Argentina", conocimientos=[programacionBasica,css,html],commits=600)
+    const Lucia = new Programador(paisOrigen="Brasil", conocimientos=[programacionBasica,basesDeDatos],commits=800)
+    const Mariana = new Especialista(paisOrigen="Argentina", conocimientos=[programacionBasica,instalacionLinux,disenioConObjetos,objetos],commits=200)
+    const Susana = new Especialista(paisOrigen="Colombia", conocimientos=[programacionBasica,objetos],commits=1500)
+    method initialize(){
+         cumbre.ingresarACumbre(Juana)
+        cumbre.ingresarACumbre(Lucia)
+        cumbre.ingresarACumbre(Mariana)
+    }
+
+  test "Si se registra a Juana, Lucía y Mariana en la cumbre, entonces tenemos: países con participantes Argentina y Brasil, 2 participantes de Argentina y 1 de Brasil, país con más participantes Argentina" {
+    assert.equals("Argentina", cumbre.paisConMasParticipantes())
+  }
+  test "la cumbre es relevante (porque son las tres capas)." {
+    assert.that(cumbre.esRelevante())
+  }
+}

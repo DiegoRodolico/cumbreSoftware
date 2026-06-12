@@ -1,24 +1,25 @@
 object cumbre {
-    const paisesParticipantes = []
+    const paisesAuspiciantes = []
     const personasParticipantes = []
     method esConflictivo(unPais){
-        return paisesParticipantes.any({p=>p.registrarConflicto(unPais)})
+        return paisesAuspiciantes.any({p=>p.registrarConflicto(unPais)})
     }
-    method ingresarCumbre(unaPersona){
+    method ingresarACumbre(unaPersona){
         personasParticipantes.add(unaPersona)
     }
     method conjuntoDePaisesDeParticipantes(){
-        return //aca completar
+        return personasParticipantes.asList({p=>p.consultarOrigen()})
     }
-    method cantidadParticipantesDeUnPais(unPais) {
+    method cantidadParticipantesDe(unPais) {
       return personasParticipantes.filter({p=>p.consultarOrigen() == unPais}) //esta consulta se puede hacer?
     }
     method paisConMasParticipantes(){
-        return //aca completar
+        return self.conjuntoDePaisesDeParticipantes().max({p=>self.cantidadParticipantesDe(p)})
     }
     method conjuntoParticipantesExtranjeros(){
-        return //aca completar
+        return personasParticipantes.filter({p=> !paisesAuspiciantes.contains(p)})
     }
+
     method esRelevante(){
         return personasParticipantes.forEach({p=>p.esCape()})
     }
@@ -26,6 +27,4 @@ object cumbre {
 class Pais {
     method registrarConflicto(otroPais)
 }
-class Conocimiento {
 
-}
